@@ -1,0 +1,30 @@
+name: 'Gemini Auto-Docs'
+description: 'Generates project documentation using Gemini CLI'
+inputs:
+  gemini_api_key:
+    description: 'API Key for Gemini'
+    required: true
+  working_directory:
+    description: 'Working directory to run in'
+    required: false
+    default: '.'
+outputs:
+  doc_file_path:
+    description: 'Path to the generated documentation file'
+    value: 'pages/index.md'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Gemini Commands
+      shell: bash
+      run: |
+        mkdir -p .gemini/commands
+        cp ${{ github.action_path }}/assets/autodocs.toml .gemini/commands/autodocs.toml
+
+    - name: Run Gemini CLI
+      uses: google-github-actions/run-gemini-cli@main
+      with:
+        gemini_api_key: ${{ inputs.gemini_api_key }}
+        prompt: "/autodocs"
+        working_directory: ${{ inputs.working_directory }}

@@ -3,6 +3,8 @@
 
 A GitHub Action that automatically generates and publishes project documentation using Google's Gemini CLI.
 
+[Read the generated documentation here](https://billnapier.github.io/gemini-auto-docs/)
+
 ## How it Works
 1.  **Reads Code**: The action runs a `gemini-cli` agent with a "Principal Software Engineer" persona.
 2.  **Analyzes**: It recursively summarizes your codebase and creates an overview.
